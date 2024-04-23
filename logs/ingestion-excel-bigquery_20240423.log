@@ -1,0 +1,20 @@
+[2024-04-23 20:06:44] [INFO]: Logger created for the application: ingestion-excel-bigquery
+[2024-04-23 20:06:44] [INFO]: Starting program execution: ingestion-excel-bigquery
+[2024-04-23 20:06:44] [INFO]: Connection to the data source successful.
+[2024-04-23 20:06:44] [INFO]: Data extraction successful.
+[2024-04-23 20:06:44] [INFO]: Connection to BigQuery successful.
+[2024-04-23 20:06:45] [INFO]: The table does not exist. Creating the table...
+[2024-04-23 20:06:46] [INFO]: Table created successfully.
+[2024-04-23 20:06:50] [INFO]: Job ID: 598a64fa-a1b6-4868-9ccc-1b5379bc86e1
+[2024-04-23 20:06:50] [INFO]: Records inserted: 3000
+[2024-04-23 20:06:50] [INFO]: End program execution was successful: ingestion-excel-bigquery
+[2024-04-23 20:10:38] [INFO]: Logger created for the application: ingestion-excel-bigquery
+[2024-04-23 20:10:38] [INFO]: Starting program execution: ingestion-excel-bigquery
+[2024-04-23 20:10:38] [INFO]: Connection to the data source successful.
+[2024-04-23 20:10:38] [INFO]: Data extraction successful.
+[2024-04-23 20:10:38] [INFO]: Connection to BigQuery successful.
+[2024-04-23 20:10:39] [INFO]: The table does not exist. Creating the table...
+[2024-04-23 20:10:40] [INFO]: Table created successfully.
+[2024-04-23 20:10:44] [INFO]: Job ID: 082a1393-e4dc-4e49-a0e1-abb821e118e6
+[2024-04-23 20:10:44] [INFO]: Records inserted: 3000
+[2024-04-23 20:10:44] [INFO]: End program execution was successful: ingestion-excel-bigquery

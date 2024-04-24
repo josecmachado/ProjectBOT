@@ -9,7 +9,6 @@ from configs import conf_big_query
 from functions.create_table_bigquery import create_table_if_not_exists
 from functions import read_and_concat_excel
 from functions.write_dataframe_bigquery import write_dataframe_to_bigquery
-from functions.add_metadata import add_metadata
 from functions.setup_logger import get_logger
 
 app_name = 'ingestion-excel-bigquery'
@@ -49,9 +48,6 @@ def execute():
     except Exception as e:
         log_message_error(f"Error during data extraction: {e}")
         return
-
-    # Call the function that adds metadata to the dataframe.
-    add_metadata(df_source, source="excel", tool="python")
 
     #Call the function that generates the schema of the table to be created.
     #generate_bigquery_schema(df_source)

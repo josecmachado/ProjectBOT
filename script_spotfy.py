@@ -2,16 +2,12 @@ import requests
 
 def get_access_token(client_id, client_secret):
     url = "https://accounts.spotify.com/api/token"
-    headers = {
-        "Authorization": "Basic <base64 encoded(client_id:client_secret)>",
-        "Content-Type": "application/x-www-form-urlencoded"
-    }
     data = {
-        "grant_type": "client_credentials"
+        "grant_type": "client_credentials",
+        'client_id': client_id,
+        'client_secret': client_secret,
     }
-
-    response = requests.post(url, headers=headers, data=data)
-
+    response = requests.post(url, data=data)
     if response.status_code == 200:
         return response.json()['access_token']
     else:
@@ -26,7 +22,8 @@ def search_spotify_podcasts(query, access_token):
     params = {
         "q": query,
         "type": "show",
-        "limit": 50
+        "limit": 50,
+        "market": "BR"
     }
 
     response = requests.get(url, headers=headers, params=params)

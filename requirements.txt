@@ -1,0 +1,4 @@
+tabulate
+pandas
+pyarrow
+google-cloud-bigquery

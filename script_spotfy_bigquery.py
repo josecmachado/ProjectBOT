@@ -78,10 +78,10 @@ def create_podcast_table(results):
     for result in results:
         if result:
             podcast_info = {
-                'Nome do Podcast': result.get('name'),
-                'Descrição': result.get('description'),
-                'Identificador Único': result.get('id'),
-                'Total de Episódios': result.get('total_episodes')
+                'Nome_Podcast': result.get('name'),
+                'Descricao': result.get('description'),
+                'Identificador_Unico': result.get('id'),
+                'Total_Episodios': result.get('total_episodes')
             }
             table_data.append(podcast_info)
 
@@ -126,12 +126,12 @@ def search_spotify_episodes(show_id, access_token):
         episode_info = {
             'ID': episode['id'],
             'Nome': episode['name'],
-            'Descrição': episode['description'],
-            'Data de Lançamento': episode['release_date'],
+            'Descricao': episode['description'],
+            'Data_Lançamento': episode['release_date'],
             'Duracao_ms': episode['duration_ms'],
             'Idioma': episode['language'],
-            'Conteúdo Explícito': 'Sim' if episode['explicit'] else 'Não',
-            'Tipo de Faixa de Áudio': episode['type']
+            'Conteudo_Explicito': 'Sim' if episode['explicit'] else 'Não',
+            'Tipo_Faixa_Audio': episode['type']
         }
         episode_data.append(episode_info)
 
@@ -140,7 +140,7 @@ def search_spotify_episodes(show_id, access_token):
     
 def filter_episodes_by_keyword(episodes_df, keyword):
     """Filters episodes based on keyword in description."""
-    filtered_episodes = episodes_df[episodes_df['Descrição'].str.contains(keyword, case=False)]
+    filtered_episodes = episodes_df[episodes_df['Descricao'].str.contains(keyword, case=False)]
     return filtered_episodes
 
 client_id = "9be79e95797f4e819d3376d0331eb5b8"
@@ -218,5 +218,5 @@ def execute():
     logger.info(f"End program execution was successful: {app_name}")
 
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     execute()

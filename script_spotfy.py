@@ -46,24 +46,24 @@ def search_spotify_podcasts(query, access_token):
 
 def filter_episodes_by_keyword(episodes_df, keyword):
     # Filter episodes based on keyword in description
-    filtered_episodes = episodes_df[episodes_df['Descrição'].str.contains(keyword, case=False)]
+    filtered_episodes = episodes_df[episodes_df['Descricao'].str.contains(keyword, case=False)]
     return filtered_episodes
 
 def create_podcast_table(results):
     # Function to create a table with the specified fields
     table_data = {
-        'Nome do Podcast': [],
-        'Descrição': [],
-        'Identificador Único': [],
-        'Total de Episódios': []
+        'Nome_Podcast': [],
+        'Descricao': [],
+        'Identificador_Unico': [],
+        'Total_Episodios': []
     }
 
     for result in results:
         if result:
-            table_data['Nome do Podcast'].append(result.get('name'))
-            table_data['Descrição'].append(result.get('description'))
-            table_data['Identificador Único'].append(result.get('id'))
-            table_data['Total de Episódios'].append(result.get('total_episodes', 0))
+            table_data['Nome_Podcast'].append(result.get('name'))
+            table_data['Descricao'].append(result.get('description'))
+            table_data['Identificador_Unico'].append(result.get('id'))
+            table_data['Total_Episodios'].append(result.get('total_episodes', 0))
 
     podcast_df = pd.DataFrame(table_data)
     return podcast_df
@@ -108,12 +108,12 @@ def search_spotify_episodes(show_id, access_token):
         episode_info = {
             'ID': episode['id'],
             'Nome': episode['name'],
-            'Descrição': episode['description'],
-            'Data de Lançamento': episode['release_date'],
+            'Descricao': episode['description'],
+            'Data_Lançamento': episode['release_date'],
             'Duração (ms)': episode['duration_ms'],
             'Idioma': episode['language'],
-            'Conteúdo Explícito': 'Sim' if episode['explicit'] else 'Não',
-            'Tipo de Faixa de Áudio': episode['type']
+            'Conteudo_Explicito': 'Sim' if episode['explicit'] else 'Não',
+            'Tipo_Faixa_Audio': episode['type']
         }
         episode_data.append(episode_info)
 

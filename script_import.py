@@ -1,19 +1,17 @@
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-from google.cloud import bigquery
-from google.oauth2 import service_account
 from datetime import datetime
-import pandas as pd
-import os
+from tabulate import tabulate
+from google.cloud import bigquery
 from configs import conf_big_query
-from functions.create_table_bigquery import create_table_if_not_exists
+from google.oauth2 import service_account
 from functions import read_and_concat_excel
-from functions.write_dataframe_bigquery import write_dataframe_to_bigquery
 from functions.setup_logger import get_logger
+from functions.create_table_bigquery import create_table_if_not_exists
+from functions.write_dataframe_bigquery import write_dataframe_to_bigquery
 
 app_name = 'ingestion-excel-bigquery'
 
-# Configure the global logger
 log_folder = 'logs'
 os.makedirs(log_folder, exist_ok=True)
 
@@ -34,7 +32,7 @@ def execute():
 
     # Connect to the data source
     try:
-        folder_source = 'C:/Users/c10447q/Projetcts/ProjectBOT/bases'
+        folder_source = 'C:/Users/DELL/Desktop/ProjectBOT/bases'
         logger.info("Connection to the data source successful.")
     except Exception as e:
         log_message_error(f"Error connecting to the data source: {e}")
@@ -88,8 +86,40 @@ def execute():
     # Load data into BigQuery
     write_dataframe_to_bigquery(logger, client_bigquery, df_source, table_bigquery, job_config)
 
+    # List of SQL Queries
+    sql_query_files = [
+        'consolid_ano_mes.sql',
+        'consolid_Lin_Ano_Mes.sql',
+        'consolid_Marc_Ano_Mes.sql',
+        'consolid_Marc_Lin.sql'
+    ]
+
+    # Execute SQL Queries
+    for sql_query_file in sql_query_files:
+        try:
+            sql_query_file_path = os.path.join('query', sql_query_file)
+            with open(sql_query_file_path, 'r') as file:
+                sql_query = file.read()
+            logger.info(f"Reading SQL query from file: {sql_query_file}")
+        except Exception as e:
+            log_message_error(f"Error reading SQL query from file {sql_query_file}: {e}")
+            continue
+
+        try:
+            query_job = client_bigquery.query(sql_query)
+            results = query_job.result()
+            logger.info(f"SQL query {sql_query_file} executed successfully.")
+
+            # Format query results into a table
+            headers = [field.name for field in query_job.result().schema]
+            rows = [list(row.values()) for row in results]
+            print(tabulate(rows, headers=headers, tablefmt="grid"))
+        except Exception as e:
+            log_message_error(f"Error executing SQL query {sql_query_file}: {e}")
+            continue
+
     #End Application
     logger.info(f"End program execution was successful: {app_name}")
 
-if __name__ == "__main__":
+if __name__ == "_main_":
     execute()

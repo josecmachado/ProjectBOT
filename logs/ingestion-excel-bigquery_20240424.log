@@ -1,0 +1,8 @@
+[2024-04-24 22:22:32] [INFO]: Logger created for the application: ingestion-excel-bigquery
+[2024-04-24 22:22:32] [INFO]: Starting program execution: ingestion-excel-bigquery
+[2024-04-24 22:22:32] [INFO]: Connection to the data source successful.
+[2024-04-24 22:22:33] [INFO]: Data extraction successful.
+[2024-04-24 22:22:33] [INFO]: Connection to BigQuery successful.
+[2024-04-24 22:22:39] [INFO]: Job ID: a6ee09e0-1141-4c9f-9feb-daefae2c17a3
+[2024-04-24 22:22:39] [INFO]: Records inserted: 3000
+[2024-04-24 22:22:39] [INFO]: End program execution was successful: ingestion-excel-bigquery
